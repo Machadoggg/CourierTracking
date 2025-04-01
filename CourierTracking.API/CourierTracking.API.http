@@ -1,0 +1,6 @@
+@CourierTracking.API_HostAddress = http://localhost:5268
+
+GET {{CourierTracking.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

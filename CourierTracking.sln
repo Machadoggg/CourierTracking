@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierTracking.API", "CourierTracking.API\CourierTracking.API.csproj", "{0767F0AC-D617-487B-873F-077E2F9B874C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierTracking.Application", "CourierTracking.Application\CourierTracking.Application.csproj", "{DD840E07-6314-4403-8C96-65162E6E3E1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierTracking.Domain", "CourierTracking.Domain\CourierTracking.Domain.csproj", "{9E5E2755-DD30-4CA8-B3B5-CF6C90D551DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierTracking.Infrastructure", "CourierTracking.Infrastructure\CourierTracking.Infrastructure.csproj", "{C4D5D8B3-27A6-4DF8-9980-7CEBD94E359A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0767F0AC-D617-487B-873F-077E2F9B874C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0767F0AC-D617-487B-873F-077E2F9B874C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0767F0AC-D617-487B-873F-077E2F9B874C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0767F0AC-D617-487B-873F-077E2F9B874C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD840E07-6314-4403-8C96-65162E6E3E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD840E07-6314-4403-8C96-65162E6E3E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD840E07-6314-4403-8C96-65162E6E3E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD840E07-6314-4403-8C96-65162E6E3E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5E2755-DD30-4CA8-B3B5-CF6C90D551DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5E2755-DD30-4CA8-B3B5-CF6C90D551DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5E2755-DD30-4CA8-B3B5-CF6C90D551DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5E2755-DD30-4CA8-B3B5-CF6C90D551DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D5D8B3-27A6-4DF8-9980-7CEBD94E359A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D5D8B3-27A6-4DF8-9980-7CEBD94E359A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D5D8B3-27A6-4DF8-9980-7CEBD94E359A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D5D8B3-27A6-4DF8-9980-7CEBD94E359A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
