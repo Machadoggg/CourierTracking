@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CourierTracking.Application\CourierTracking.Application.csproj" />
+    <ProjectReference Include="..\CourierTracking.Infrastructure\CourierTracking.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
