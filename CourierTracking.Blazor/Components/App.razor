@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
+    @* AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg *@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,10 +10,66 @@
     <link rel="stylesheet" href="CourierTracking.Blazor.styles.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
+     <!-- Define initMap() first -->
+    @* <script>
+      function initMap() {
+        // Your map initialization code here
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 8,
+        });
+      }
+    </script> *@
+
+    
 </head>
 
 <body>
     <Routes />
+    @* <script>
+      (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+        key: "AIzaSyBa9Pben5dhXcHqDUybYPOUgNLnDwZ1fTw",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+    </script> 
+
+    <script 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa9Pben5dhXcHqDUybYPOUgNLnDwZ1fTw&libraries=visualization&callback=initMap"
+      async
+      defer>
+    </script>*@
+
+    @* <gmp-map
+      center="43.4142989,-124.2301242"
+      zoom="4"
+      map-id="DEMO_MAP_ID"
+      style="height: 400px"
+    >
+      <gmp-advanced-marker
+        position="37.4220656,-122.0840897"
+        title="Mountain View, CA"
+      ></gmp-advanced-marker>
+      <gmp-advanced-marker
+        position="47.648994,-122.3503845"
+        title="Seattle, WA"
+      ></gmp-advanced-marker>
+    </gmp-map> *@
+
+    <!-- 
+      The `defer` attribute causes the script to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises. See
+      https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+      -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa9Pben5dhXcHqDUybYPOUgNLnDwZ1fTw&libraries=maps,marker&v=beta"
+      async
+      defer
+    ></script>
+
     <script src="_framework/blazor.web.js"></script>
 </body>
 

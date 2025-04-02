@@ -7,7 +7,7 @@
 @inject HttpClient Http
 @implements IDisposable
 
-<h1>Monitoreo de Mensajeros</h1>
+@* <h1>Monitoreo de Mensajeros</h1> *@
 
 @if (couriers == null)
 {
@@ -16,7 +16,22 @@
 else
 {
     <div class="map-container">
-        <GoogleMap @ref="@map" Id="map1" Options="@mapOptions" OnAfterInit="@AfterMapInit" />
+        @* <GoogleMap @ref="@map" Id="map1" Options="@mapOptions" OnAfterInit="@AfterMapInit" /> *@
+        <gmp-map
+          center="6.239165301680521, -75.57266292208885"
+          zoom="12"
+          map-id="DEMO_MAP_ID"
+          style="height: 500px"
+        >
+          <gmp-advanced-marker
+            position="6.239165301680521, -75.57266292208885"
+            title="HeliCoil, Medellín"
+          ></gmp-advanced-marker>
+          <gmp-advanced-marker
+            position="6.262729, -75.595163"
+            title="Estadio, Medellín"
+          ></gmp-advanced-marker>
+        </gmp-map>
     </div>
 
     <div class="courier-list">
