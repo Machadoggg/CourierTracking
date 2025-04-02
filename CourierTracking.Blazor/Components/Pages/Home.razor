@@ -1,7 +1,137 @@
 ﻿@page "/"
+@using CourierTracking.Domain.Entities
+@using GoogleMapsComponents
+@using GoogleMapsComponents.Maps
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@implements IDisposable
 
-<PageTitle>Home</PageTitle>
+<h1>Monitoreo de Mensajeros</h1>
 
-<h1>Hello, world!</h1>
+@if (couriers == null)
+{
+    <p>Cargando mensajeros...</p>
+}
+else
+{
+    <div class="map-container">
+        <GoogleMap @ref="@map" Id="map1" Options="@mapOptions" OnAfterInit="@AfterMapInit" />
+    </div>
 
-Welcome to your new app.
+    <div class="courier-list">
+        <h3>Mensajeros</h3>
+        <ul>
+            @foreach (var courier in couriers)
+            {
+                <li @onclick="() => CenterMap(courier.LastLocation?.Latitude ?? 0, courier.LastLocation?.Longitude ?? 0)">
+                    @courier.Name - @courier.VehicleType
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+    private GoogleMap map;
+    private MapOptions mapOptions;
+    private List<Courier> couriers = new();
+    private HubConnection hubConnection;
+    private Dictionary<int, Marker> courierMarkers = new();
+    private Dictionary<int, Polyline> courierPaths = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        couriers = await Http.GetFromJsonAsync<List<Courier>>("https://localhost:7287/api/couriers");
+        
+        mapOptions = new MapOptions()
+        {
+            Zoom = 12,
+            Center = new LatLngLiteral(4.6097, -74.0817), // Bogotá por defecto
+            MapTypeId = MapTypeId.Roadmap
+        };
+
+        await InitializeSignalR();
+    }
+
+    private async Task InitializeSignalR()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/locationHub"))
+            // OR if your API is on a different port:
+            .WithUrl("https://localhost:7287/locationHub")
+            .Build();
+
+        hubConnection.On<int, double, double, double?>("ReceiveLocationUpdate", async (courierId, lat, lng, speed) =>
+        {
+            var courier = couriers.FirstOrDefault(c => c.Id == courierId);
+            if (courier != null)
+            {
+                courier.LastLocation = new LocationHistory
+                {
+                    Latitude = lat,
+                    Longitude = lng,
+                    Speed = speed,
+                    Timestamp = DateTime.UtcNow
+                };
+
+                await UpdateCourierMarker(courier);
+                await UpdateCourierPath(courierId, lat, lng);
+                
+                StateHasChanged();
+            }
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    private async Task AfterMapInit()
+    {
+        foreach (var courier in couriers)
+        {
+            await AddCourierMarker(courier);
+        }
+    }
+
+    private async Task AddCourierMarker(Courier courier)
+    {
+        if (courier.LastLocation == null) return;
+
+        var marker = await Marker.CreateAsync(map.JsRuntime, new MarkerOptions
+        {
+            Position = new LatLngLiteral(courier.LastLocation.Latitude, courier.LastLocation.Longitude),
+            Map = map.InteropObject,
+            Label = courier.Name[0].ToString(),
+            Title = courier.Name
+        });
+
+        courierMarkers[courier.Id] = marker;
+    }
+
+    private async Task UpdateCourierMarker(Courier courier)
+    {
+        if (courierMarkers.TryGetValue(courier.Id, out var marker) && courier.LastLocation != null)
+        {
+            await marker.SetPosition(new LatLngLiteral(courier.LastLocation.Latitude, courier.LastLocation.Longitude));
+        }
+        else
+        {
+            await AddCourierMarker(courier);
+        }
+    }
+
+    private async Task UpdateCourierPath(int courierId, double lat, double lng)
+    {
+        // Implementar lógica para actualizar la ruta del mensajero
+    }
+
+    private async Task CenterMap(double lat, double lng)
+    {
+        await map.InteropObject.PanTo(new LatLngLiteral(lat, lng));
+    }
+
+    public void Dispose()
+    {
+        hubConnection?.DisposeAsync();
+    }
+}

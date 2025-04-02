@@ -7,5 +7,8 @@
         public string Phone { get; set; } = default!;
         public string VehicleType { get; set; } = default!;
         public bool IsActive { get; set; } = true;
+
+
+        public LocationHistory LastLocation { get; set; } = default!;
     }
 }
