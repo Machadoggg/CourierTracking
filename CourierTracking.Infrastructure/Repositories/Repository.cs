@@ -21,14 +21,7 @@ namespace CourierTracking.Infrastructure.Repositories
         public async Task DeleteAsync(T entity) => _dbContext.Set<T>().Remove(entity);
     }
 
-    // Data/AppDbContext.cs
-    public class AppDbContext : DbContext
-    {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-        public DbSet<Courier> Couriers { get; set; }
-        public DbSet<LocationHistory> LocationHistories { get; set; }
-    }
+    
 
     // Services/CourierService.cs
     public class CourierService : ICourierService
