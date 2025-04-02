@@ -9,5 +9,11 @@ namespace CourierTracking.Infrastructure.Data
 
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<LocationHistory> LocationHistories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Courier>().ToTable("Courier");
+            modelBuilder.Entity<LocationHistory>().ToTable("LocationHistory");
+        }
     }
 }
