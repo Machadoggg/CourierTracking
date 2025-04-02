@@ -36,10 +36,22 @@
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+            }).addTo(map); 
 
             L.marker([6.239165301680521, -75.57266292208885]).addTo(map)
                 .bindPopup('HeliCoil Service.<br> Medellín')
+                .openPopup();
+
+            L.marker([6.298290, -75.566982]).addTo(map)
+                .bindPopup('Tenico 1.<br> Moto')
+                .openPopup();
+
+            L.marker([6.275394, -75.564451]).addTo(map)
+                .bindPopup('Tecnico 2.<br> Miranda - Moto')
+                .openPopup();
+
+            L.marker([6.262729, -75.595163]).addTo(map)
+                .bindPopup('Tecnico 3.<br> Estadio - Moto')
                 .openPopup();
 
         }
