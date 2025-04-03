@@ -15,8 +15,10 @@
 }
 else
 {
+    @* <div class="map-container">
+        <GoogleMap @ref="@map" Id="map1" Options="@mapOptions" OnAfterInit="@AfterMapInit" />
+    </div> *@
     <div class="map-container">
-        @* <GoogleMap @ref="@map" Id="map1" Options="@mapOptions" OnAfterInit="@AfterMapInit" /> *@
         <gmp-map
           center="6.239165301680521, -75.57266292208885"
           zoom="12"
