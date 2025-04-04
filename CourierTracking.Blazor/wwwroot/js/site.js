@@ -1,0 +1,1 @@
+﻿var gmap_key = "AIzaSyBa9Pben5dhXcHqDUybYPOUgNLnDwZ1fTw"
